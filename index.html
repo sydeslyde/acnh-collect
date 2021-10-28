@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ACNH-Collect</title>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400;500;600;700&display=swap");
+
+            :root {
+                --main-background: white;
+                --main-font-color: black;
+            }
+
+            @media (prefers-color-scheme: dark) {
+                :root {
+                    --main-background: black;
+                    --main-font-color: white;
+                }
+            }
+
+            html,
+            body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                font-family: "Baloo Paaji 2", sans-serif;
+                font-size: 1.2rem;
+                text-align: center;
+                background-color: var(--main-background);
+                color: var(--main-font-color);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            a {
+                color: var(--main-font-color);
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <h1>ACNH-Collect moved.</h1>
+            <p id="already-migrated" style="display: none">
+                You already migrated your collection data to the new site. 👍
+            </p>
+            <p>
+                <a href="https://avgrad.github.io/acnh-collect/">
+                    CLICK HERE TO GO TO THE NEW SITE
+                </a>
+            </p>
+        </div>
+        <script>
+            const idToFilename = {
+                "9xzmsc8b5w5": "bell_cricket", "mll07h6nl6f": "brachio_skull", "tiwmxa34dy9": "snapping_turtle", "de4d5zzr0dq": "shark-tooth_pattern",
+                "y2kptfgom9": "pill_bug", "e9gew0qoq4r": "anomalocaris", "i0v5hdukd1": "oarfish", "dek8iq3z3k": "moth", "ppl3u6h4tgg": "squid",
+                "10s2qye8g2d": "bitterling", "i9j4dba1us": "pop-eyed_goldfish", "gzbi6jsfuyn": "pike", "6bqm25rcmv7": "golden_stag",
+                "c9ja7h0tzi": "mantis", "3elia5tr7l3": "miyama_stag", "mbyyr1zk7e": "diplo_chest", "ej2br642bib": "pond_smelt", "mjv5sp1pq2i": "carp",
+                "vl3u66tyw4i": "citrus_long-horned_beetle", "h9ixchw6iiw": "right_megalo_side", "1jwkfiikvqc": "hermit_crab", "2l6oafc78pf": "stinkbug",
+                "2bzcd6qcboz": "sabertooth_skull", "otadon0bofo": "stego_skull", "jaop9wo3fcq": "violin_beetle", "7mjo4h47laj": "tiger_beetle",
+                "u382go3kxuc": "giant_snakehead", "4m547gdcsxo": "horned_elephant", "e9z0lnjvyv8": "diplo_skull", "leamj9tx7e": "archelon_tail",
+                "exxr8jrqvc9": "dimetrodon_torso", "41vzmwamqvz": "surgeonfish", "rx7khcltv5b": "peacock_butterfly", "uqtdny88ai": "iguanodon_skull",
+                "xhkutgyz81": "scorpion", "9vqrougvutg": "giant_cicada", "yth5im8mm6g": "diplo_tail", "g7ak62npftl": "whale_shark",
+                "xu8u8g9gk5b": "freshwater_goby", "ffqhbjlz2jo": "dab", "ze4oig0272m": "giant_stag", "n3xjhwp7p7e": "ribbon_eel",
+                "higsljncycf": "mahi-mahi", "rh36770dz8a": "agrias_butterfly", "ou2i3k5074": "horse_mackerel", "xo6x7us4vl": "robust_cicada",
+                "ukdsyt7ze6i": "monarch_butterfly", "uu6ws8t0ils": "stego_torso", "g01m40n2ds7": "ankylo_torso", "115a186cmbaf": "ray",
+                "jfandlwdmgi": "coelacanth", "94cjptbx0me": "sea_bass", "nbyuowvghar": "ant", "eaxjzooxx": "megacero_skull", "8q4vkuy1e03": "wharf_roach",
+                "wceds85uok": "pachy_tail", "huq1tfw9bjg": "football_fish", "ytft2om3hmb": "left_quetzal_wing", "s13tasor82": "damselfly",
+                "01vkkxsnsxux": "frog", "4jufa016b6": "ankylo_tail", "iwggdfzjht": "blowfish", "z2s4pudjw5e": "mammoth_skull", "ymqahkzq8c": "mitten_crab",
+                "iqzdbhr03j": "sweetfish", "1l4gs7hjjsmh": "darner_dragonfly", "832rth6u2s6": "arapaima", "egyt6fcaahh": "brown_cicada",
+                "j6rsw1mjhp": "pondskater", "cgudmoo3y4v": "amber", "o9docaea0q": "goliath_beetle", "f65yo5773v": "ankylo_skull",
+                "hl629kn3bm": "diplo_tail_tip", "28om5nuim1e": "brachio_pelvis", "yqj1frw6qjl": "centipede", "emwqiey8h7m": "tricera_torso",
+                "ruoriz0am6n": "giraffe_stag", "ip6gfss6xo": "pachy_skull", "kmq18013evc": "cyclommatus_stag", "tk07fvb1uab": "ophthalmo_torso",
+                "au2gdu5cibj": "salmon", "zcfctjeb3vp": "iguanodon_tail", "0rpbmuqoa5wq": "dorado", "vzbjqoj8br": "dunkleosteus",
+                "gef8r49et5g": "quetzal_torso", "gpbsr4qgurm": "neon_tetra", "x8fg8nun3m": "ranchu_goldfish", "os4kvpt5dub": "horned_hercules",
+                "hmjc5af8omn": "barreleye", "etje0lm58eu": "spider", "43riljin60f": "fly", "1pmye3k9d3c": "horned_dynastid", "pf2ipojdrp": "juramaia",
+                "qf3unuq4sni": "olive_flounder", "ceipcwjaqhi": "stringfish", "fwhsqv0ab9": "napoleonfish", "cbvfpyearhe": "yellow_perch",
+                "awqh5mkdjy9": "tiger_butterfly", "cidv6y3tv4t": "great_white_shark", "wlaz8qmhd4": "australopith", "xwehcvlwdic": "tuna",
+                "srqmqo0ohbp": "sabertooth_tail", "tu2wea09u4j": "tricera_tail", "m1v5ion71kp": "migratory_locust", "7l3joyv1lym": "diving_beetle",
+                "8gwvm7hi3k4": "earth-boring_dung_beetle", "tgroiweh6mb": "acanthostega", "ystahsic6oh": "dung_beetle", "pnn1mglmgs": "rice_grasshopper",
+                "giu74teoy6r": "ophthalmo_skull", "y3qigewrptc": "right_quetzal_wing", "eana1tcsz16": "mammoth_torso", "c6x2xj9hd9w": "emperor_butterfly",
+                "o6qw454hmzh": "char", "3vplee5gcdg": "anchovy", "90wfwkutrur": "plesio_skull", "5ojkh70u1da": "rainbow_stag",
+                "jt7h3egzfhe": "walker_cicada", "oshe6mruspl": "saw_shark", "1vyv6uqye45": "zebra_turkeyfish", "pf9kh76mdwg": "trex_torso",
+                "jz5fg2uu6j": "clownfish", "3fcwqrytl0n": "archelon_skull", "l699ew4it49": "king_salmon", "u6by6vvmt": "common_butterfly",
+                "waimewhezom": "puffer_fish", "zpdku0qtlmc": "brachio_tail", "8vgb6mysf6m": "great_purple_emperor", "vk8u29urva9": "ammonite",
+                "u0311ok26a8": "red_snapper", "dwajk73ees6": "walking_leaf", "gfgi3r19l38": "rajah_brookes_birdwing", "i309wwlaytj": "trex_skull",
+                "tdnq8lryr5": "mole_cricket", "jp7h8opdui": "dimetrodon_skull", "bmj1zjmdedn": "plesio_torso", "udaswxwt17o": "diplo_neck",
+                "s4zq6hgthfm": "flea", "89vond0eopb": "deinony_torso", "cz2p2mmm71": "blue_marlin", "38ev1v4gtv8": "nibble_fish",
+                "vdlb2n4x35c": "madagascan_sunset_moth", "ztbj2uvbdgc": "diplo_pelvis", "ly3bujz45mi": "man-faced_stink_bug", "6ua198sf3hs": "bagworm",
+                "juux5lumfdk": "parasaur_torso", "0ydje7qj4xhb": "barred_knifejaw", "xj33iemw8ea": "iguanodon_torso", "sp9uslf55i": "cherry_salmon",
+                "m0ifdwo4t8": "drone_beetle", "pg57bzhgu5s": "golden_trout", "lacbqex1y1a": "spino_torso", "0mq793ztjbuf": "grasshopper",
+                "n4ejzq2kn2": "loach", "d8sojnizxu": "gar", "0b1f4pgtd6yj": "myllokunmingia", "cyp1drd2re": "archaeopteryx", "f85v3rhcryl": "pale_chub",
+                "13weyt7v3lk": "snail", "29coet7m0fw": "long_locust", "9wj2takeo5": "goldfish", "hlvszz42eg": "mosquito", "lee7mvs8d1g": "honeybee",
+                "4w42l2zmkum": "megacero_torso", "p57ms3isos": "ladybug", "d7xjfz5gvd": "hammerhead_shark", "puyu3cn5w2o": "crucian_carp",
+                "e6kam661yjd": "piranha", "g6mbcuuw34b": "parasaur_tail", "y685u3knafk": "orchid_mantis", "0rafe725yfii": "giant_trevally",
+                "774v50kpqa3": "evening_cicada", "x0s1ueozc9": "bluegill", "gti0m32wwj": "yellow_butterfly", "trcwhvnwmg": "tilapia",
+                "hirrsactzgb": "spino_skull", "u37enciihot": "killifish", "k35jvwe4t5d": "arowana", "ny80iv28log": "megacero_tail",
+                "iemrpvi7a2": "guppy", "eih0rx18k05": "atlas_moth", "i909n7ewiu": "black_bass", "mzn58rlt2i": "sea_horse", "xnnjgwvf17": "tricera_skull",
+                "6vq2ei0kgcq": "plesio_tail", "bzmofmx7fxc": "trilobite", "tje8c6tso1h": "dace", "118jqbi07coj": "dinosaur_track",
+                "1893gijpz4c": "brachio_chest", "1tk2tvpdwfj": "walking_stick", "0m9fxw9tib09": "deinony_tail", "w8igjg0hq5": "jewel_beetle",
+                "b0taraggokw": "scarab_beetle", "ss17mwh385o": "saddled_bichir", "gfmbkvse4pl": "left_megalo_side", "wtsbiipi8ea": "common_bluebottle",
+                "y2l70z1dzas": "tadpole", "2j1wpbc1577": "spino_tail", "c97volhs7bg": "suckerfish", "8f6qob4000u": "coprolite", "jlj9hc6bnyl": "koi",
+                "pmtkiphqu9": "angelfish", "uja5mooxoa9": "sea_butterfly", "5zbbsaubz1b": "paper_kite_butterfly", "9thg1h7a50v": "horned_atlas",
+                "6hcaj6kxcgw": "cicada_shell", "hisoo6r06zl": "stego_tail", "a54s591iyu7": "banded_dragonfly", "gbqf5okro5r": "moray_eel",
+                "r7fe96ndkfm": "rosalia_batesi_beetle", "klsrjfonyu9": "tarantula", "nptg8vh3n4": "firefly", "l6g00s2vyve": "soft-shelled_turtle",
+                "4wmfsq0jz49": "crawfish", "5tuf9bz9azd": "catfish", "ef790lmc82v": "butterfly_fish", "bansnhvcaa": "cricket",
+                "ygvos6insif": "right_ptera_wing", "8sl4oou5i8a": "giant_water_bug", "xhrxcgj9izs": "ocean_sunfish", "nvl9zem2kvm": "wasp",
+                "xipiev4clr": "betta", "57r9iz9gf8o": "eusthenopteron", "5b4vkokjq6": "sturgeon", "a3bg4lky2c": "rainbowfish", "xkmizqbyn7": "trex_tail",
+                "rqmtez2jmr": "parasaur_skull", "kzkbz9hntwn": "saw_stag", "5n3ws7oiafo": "blue_weevil_beetle", "p6dphroqc9m": "queen_alexandras_birdwing",
+                "0j49gr1x5so": "left_ptera_wing", "jmlzpwkyzck": "red_dragonfly", "4nmvkift9k": "ptera_body", "uk4j280dl7": "quaint_painting",
+                "e76b1uaaeln": "graceful_painting", "cujqp7uerr": "robust_statue", "goj3gwmoqok": "common_painting", "ikxmqdrtsv": "famous_painting",
+                "k89j81gzbzr": "flowery_painting", "mbqsz0tsk6m": "detailed_painting", "il66nwk340c": "rock-head_statue", "2w8mzcfflh": "serene_painting",
+                "dt68bkohhzd": "basic_painting", "4xtkzs46biu": "beautiful_statue", "bqls5c2nu5": "amazing_painting", "37l2fmv3fdy": "valiant_statue",
+                "lvvfmoklui": "solemn_painting", "ce47gv380r": "twinkling_painting", "630mxcm29u7": "scary_painting", "hq874j9hhnu": "gallant_statue",
+                "uhor8cevu7b": "mystic_statue", "qfyoj6j851n": "jolly_painting", "tkko9ecqkr": "informative_statue", "bcwwyxt774v": "nice_painting",
+                "xrr56whmjld": "moody_painting", "8ng267p73lv": "warrior_statue", "2ooppbm75b2": "glowing_painting", "gjpt8x1ac24": "perfect_painting",
+                "pkd232uuv6e": "wistful_painting", "914aqij4hu": "tremendous_statue", "3sv8nepjo1a": "mysterious_painting", "idkj07rpp6": "calm_painting",
+                "ni8vfj2buj9": "moving_painting", "nvow580e5v": "proper_painting", "p2o6t3yewld": "wild_painting_left_half",
+                "pakmji5rt9": "wild_painting_right_half", "0eq2bpi2xiim": "ancient_statue", "tn7i1ormdo": "sinking_painting",
+                "bi3sesjcdp8": "familiar_statue", "0jutq3uxjja": "worthy_painting", "o0mgu8qc5uq": "warm_painting", "zeuyyprr29q": "dynamic_painting",
+                "a317o9zy0tn": "scenic_painting", "lw4wo7buaze": "academic_painting", "71gvvzzhmg6": "motherly_statue", "z2mzp4it918": "great_statue",
+                "KM4dfXCZ6CvZjEyw9": "seaweed", "3emjFCipv2bgQ6HaM": "sea_urchin", "Hr2jZ9XybS3jYFw8H": "pearl_oyster", "efXQqEuT2yZApwmGB": "turban_shell",
+                "kXFeaEJCCEkQ58T2e": "umbrella_octopus", "bQNma5vbcs7wWRqY7": "snow_crab", "5v5X2ipAYLaALxMsw": "sweet_shrimp",
+                "bbhHaiT2qwcTy46X5": "horseshoe_crab", "eBdtw3eCrMuP9LWyn": "sea_grapes", "TMftNBRmEGkvhpfnC": "slate_pencil_urchin",
+                "M784h47XqSbBSthgT": "mussel", "LnurTYKDSPtsiQr62": "abalone", "deJZZk2rxAnePwfzq": "vampire_squid", "F3XTwHJQcfdrJk4vk": "red_king_crab",
+                "WvZWyzkotj6WQ3tLy": "mantis_shrimp", "e29uLe7tkErhipLfS": "sea_pineapple", "2jxxcGooLMwyyiNQc": "sea_cucumber",
+                "fre7kn6ALvnpnH8yC": "sea_anemone", "aacYapCp5wKdQDCmB": "oyster", "EQmRaHjokMEGTDC7G": "gigas_giant_clam",
+                "ETuWxdyZNpqeFCYby": "firefly_squid", "QjvNJrjo5pNqZzuGq": "acorn_barnacle", "9n5iphC8vQe6Rar72": "spiny_lobster",
+                "zYEHNF5Svak8ZARMW": "spotted_garden_eel", "kxxguvYvS4G3o7E5x": "sea_pig", "iugx8EqNWqiwv73C7": "moon_jellyfish",
+                "fMwWEu3Zwy6tZdX2X": "scallop", "cmNawSTGaZZjRi5sp": "chambered_nautilus", "ruLaEghgv3y3obBA2": "gazami_crab",
+                "gp2XNvGKNGmR6buT3": "spider_crab", "5DadWMEddJREFyXKo": "lobster", "4LAq9YXXj4ZdfkSuK": "flatworm", "vAF9BcZt5q8gBQJmj": "sea_star",
+                "3YjdEG93fagcXpiuf": "sea_slug", "jSidvLMAXdiDAQNs6": "whelk", "f7amqwd7b3fHnvPFA": "octopus", "jTP553H6DNuKBSAKa": "dungeness_crab",
+                "EaMd8ansu3qtzAGbv": "tiger_prawn", "eGLoSDD4EWD2c6SGs": "giant_isopod", "mSvTRhay8tmGXseMt": "venus_flower_basket"
+            };
+
+            const linkElm = document.querySelector("a");
+            if (localStorage.getItem("donated-migrated") === "true") {
+                linkElm.href = "https://avgrad.github.io/acnh-collect/";
+                document.querySelector("#already-migrated").style.display = "unset";
+            } else {
+                const stored = JSON.parse(localStorage.getItem("donated") ?? "[]")
+                    .map(id => idToFilename[id] || id);
+                const hash = "#import=" + stored.join(";");
+                const newUrl = "https://avgrad.github.io/acnh-collect/" + hash;
+
+                linkElm.innerText =
+                    "CLICK HERE TO MIGRATE YOUR COLLECTION TO THE NEW SITE";
+                linkElm.href = newUrl;
+                linkElm.addEventListener("click", () => {
+                    localStorage.setItem("donated-migrated", "true");
+                });
+            }
+        </script>
+    </body>
+</html>
