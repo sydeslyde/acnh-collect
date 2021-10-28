@@ -146,7 +146,7 @@
                 const newUrl = "https://avgrad.github.io/acnh-collect/" + hash;
 
                 linkElm.innerText =
-                    "CLICK HERE TO MIGRATE YOUR COLLECTION TO THE NEW SITE";
+                    "CLICK HERE TO MIGRATE YOUR " + stored.length + " COLLECTIBLES TO THE NEW SITE";
                 linkElm.href = newUrl;
                 linkElm.addEventListener("click", () => {
                     localStorage.setItem("donated-migrated", "true");
